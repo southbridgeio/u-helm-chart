@@ -29,7 +29,7 @@ serviceAccount:
   annotations: {}
   name: ""
 
-deploymentAnnotations: []
+deploymentAnnotations: {}
 #  prometheus.io/scrape: "true"
 
 podAnnotations: {}
@@ -177,7 +177,9 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-configMaps: {}
+configmapAnnotations: {}
+
+configMaps: []
 #  - name: my-config
 #    mountPath: /etc/my-config
 #    readOnly: true
@@ -319,6 +321,12 @@ env: []
 envFromSecrets:
   enableEnvFrom: false
   secretName: example-external-secret
+
+envFrom: []
+#  - secretRef:
+#      name: app-secrets
+#  - configMapRef:
+#      name: app-config
 
 envSecrets:
   enableEnv: false

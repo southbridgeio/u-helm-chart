@@ -1,0 +1,9 @@
+envFrom:
+  - configMapRef:
+      name: shared-config
+  - secretRef:
+      name: shared-secrets
+
+envFromSecrets:
+  enableEnvFrom: true
+  secretName: app-runtime-secret

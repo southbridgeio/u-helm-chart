@@ -172,10 +172,20 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+          {{- $mainEnvFromList := list }}
           {{- if and .Values.envFromSecrets .Values.envFromSecrets.enableEnvFrom }}
+            {{- $mainEnvFromList = append $mainEnvFromList (dict "secretRef" (dict "name" .Values.envFromSecrets.secretName)) }}
+          {{- end }}
+          {{- if .Values.envFrom }}
+            {{- range .Values.envFrom }}
+              {{- $mainEnvFromList = append $mainEnvFromList . }}
+            {{- end }}
+          {{- end }}
+          {{- if $mainEnvFromList }}
           envFrom:
-            - secretRef:
-                name: {{ .Values.envFromSecrets.secretName }}
+            {{- range $mainEnvFromList }}
+            - {{- toYaml . | nindent 14 }}
+            {{- end }}
           {{- end }}
           ports:
             - name: {{ .Values.service.name }}

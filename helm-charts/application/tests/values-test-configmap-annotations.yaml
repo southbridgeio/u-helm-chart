@@ -1,0 +1,14 @@
+deploymentAnnotations:
+  reloader.stakater.com/auto: "true"
+
+configmapAnnotations:
+  argocd.argoproj.io/sync-wave: "-10"
+  reloader.stakater.com/match: "true"
+
+configMaps:
+  - name: annotated-config
+    mountPath: /etc/app-config
+    readOnly: true
+    data:
+      app.conf: |
+        debug = true
